@@ -1,7 +1,7 @@
 import java.util.Arrays;
 
 
-public class VectorUtilities {
+public class MatrixUtilities {
 	
 	public static int[] multiplyByInt(int multiplier, int[] vector) {
 		if (multiplier == 0) 

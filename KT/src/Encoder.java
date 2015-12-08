@@ -48,7 +48,7 @@ public class Encoder {
 		int tmp = 0;
 		int[][] mm = null;
 		try {
-			mm = VectorUtilities.multiplyMatrixByVector(m, matrix);
+			mm = MatrixUtilities.multiplyMatrixByVector(m, matrix);
 		} catch (VectorException e) {
 			e.printStackTrace();
 		}

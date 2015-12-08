@@ -14,9 +14,15 @@ public class main {
 		}
 		
 		e.Encode();
-				
+		
 		for (int i = 0; i < e.encoded.length; i++) {
-		   System.out.print(e.encoded[i] + " ");
+			   System.out.print(e.encoded[i] + " ");
+			}
+		System.out.println();
+		int[] distored = ChannelSimulation.simulateNoise(0.5, e.encoded);
+				
+		for (int i = 0; i < distored.length; i++) {
+		   System.out.print(distored[i] + " ");
 		}
 		
 		
