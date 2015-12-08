@@ -6,9 +6,12 @@ public class MatrixUtilities {
 	static int[][] H = {{1, 1}, {1, -1}};
 	
 	public static int[] multiplyByInt(int multiplier, int[] vector) {
-		if (multiplier == 0) 
-			Arrays.fill(vector, 0);
-		return vector;
+		int[] result = vector;
+		
+		for (int i = 0; i < vector.length; i++)
+			result[i] = multiplier * vector[i];
+		
+		return result;
 	}
 	
 	public static int[][] multiplyMatrixByVector(int[] vector, int[][] matrix) throws VectorException {
@@ -20,6 +23,17 @@ public class MatrixUtilities {
 		for (int i = 0; i < vector.length; i++)
 			result[i] = multiplyByInt(vector[i], matrix[i]);
 		return result;
+	}
+	
+	/* Apskaiciuojama vektoriaus ir matricos sandauga */
+	public static int[] dotProduct(int[] A, int[][] B) {
+		int[] result = new int[A.length];
+		
+		for (int i = 0; i < B[0].length; i++)
+			for (int j = 0; j < A.length; j++)
+				result[i] += A[j] * B[j][i];
+		
+		return result;		
 	}
 	
 	
@@ -44,9 +58,7 @@ public class MatrixUtilities {
 	}
 	
 	public static int[][] hadamardMatrix(int i, int m) {
-		
 		return MatrixUtilities.kronecherProduct(MatrixUtilities.kronecherProduct(MatrixUtilities.identityMatrix((int) Math.pow(2, m-i)), H), MatrixUtilities.identityMatrix((int) Math.pow(2, i-1)));
-	
 	}
 	
 	
