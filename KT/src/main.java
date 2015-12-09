@@ -4,16 +4,23 @@ public class main {
 	private static Encoder e;
 	
 	public static void main(String args[]) {
-		e = new Encoder(10);
-		e.m = new int[]{0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1};
+		int m = 12;
+		e = new Encoder(m);
+		e.m = new int[]{1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0};
 		e.Encode();
 
-		int[] distored = ChannelSimulation.simulateNoise(1, e.encoded);
+		int[] distored = ChannelSimulation.simulateNoise(0, e.encoded);
 		
+		int[] decoded = Decoder.optimizedDecode(distored, m);
+		for (int i = 0; i < decoded.length; i++)
+			System.out.print(decoded[i] + " ");
+		System.out.println();
+		int[] decodedNotOptimal = Decoder.decode(distored, m);
+		for (int i = 0; i < decodedNotOptimal.length; i++)
+			System.out.print(decodedNotOptimal[i] + " ");
+		System.out.println();
+	
 		
-		int[] r = Decoder.decode(distored, 10);
-		for (int i = 0; i < r.length; i++)
-			System.out.print(r[i]);
 	}
 	
 }
