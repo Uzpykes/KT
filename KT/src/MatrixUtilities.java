@@ -1,12 +1,11 @@
 
 
-
 public class MatrixUtilities {
 	
 	static int[][] H = {{1, 1}, {1, -1}};
 	
 	public static int[] multiplyByInt(int multiplier, int[] vector) {
-		int[] result = vector;
+		int[] result = new int[vector.length];
 		
 		for (int i = 0; i < vector.length; i++)
 			result[i] = multiplier * vector[i];
@@ -57,15 +56,18 @@ public class MatrixUtilities {
 		return result;
 	}
 	
+	
+	/*
+	 * 	Hadamard matrica gauta pagal apibrezimo, neoptimali, todel siame darbe nenaudojama
+	 * 
+	 */
 	public static int[][] hadamardMatrix(int i, int m) {
 		return MatrixUtilities.kronecherProduct(MatrixUtilities.kronecherProduct(MatrixUtilities.identityMatrix((int) Math.pow(2, m-i)), H), MatrixUtilities.identityMatrix((int) Math.pow(2, i-1)));
 	}
 	
 	/* 
 	 * Grazina skaiciavimams reikalinga informacija (nenulines reiksmes)
-	 * 
 	 * Taip apeinamas bereikalingas atminties naudojimas kuriant matrica kurios didele dalis nulines reiksmes
-	 * 	
 	 */
 	public static OptimizedHadamard optimizedHadamardMatrix(int i, int m) {
 		//Pagrindine istrizaina

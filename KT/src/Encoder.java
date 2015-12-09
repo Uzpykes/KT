@@ -3,9 +3,7 @@
 
 public class Encoder {
 
-	public int[][] matrix;
-	public int[] m;
-	public int[] encoded;
+	public static int[][] matrix;
 	public int height;
 	public int width;
 	
@@ -20,7 +18,6 @@ public class Encoder {
 		G();
 		this.height = matrix[0].length;
 		this.width = matrix.length;
-		encoded = new int[matrix[0].length];
 	}
 	
 
@@ -44,11 +41,17 @@ public class Encoder {
 		}
 	}
 	
-	public void Encode() {
+	public static int[] Encode(int[] m) {
 		int tmp = 0;
-		int[][] mm = null;
+		int[] result = new int[matrix[0].length];
+		int[][] mm = new int[matrix.length][matrix[0].length];
 		try {
 			mm = MatrixUtilities.multiplyMatrixByVector(m, matrix);
+			/*for (int i = 0; i < mm.length; i++){
+				for (int j = 0; j < mm[0].length; i++)
+					System.out.print(mm[j][i] + "");
+			System.out.println();
+			}*/
 		} catch (VectorException e) {
 			e.printStackTrace();
 		}
@@ -57,8 +60,9 @@ public class Encoder {
 			for(int j = 0; j < matrix.length; j++) {
 				tmp = (tmp + mm[j][i]) % 2;
 			}
-			encoded[i] = tmp;
+			result[i] = tmp;
 		}
+		return result;
 	}
 	
 	
