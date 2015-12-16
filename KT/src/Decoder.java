@@ -1,6 +1,11 @@
 
 public class Decoder {
 
+	/*
+	 * Atlieka: Pakeicia 0 i -1
+	 * Ieitis: message - zinute kurioje pakeiciami nuliai
+	 * Iseitis: resul - zinute kurioje 0 pakeisti i -1
+	 */
 	private static int[] replaceZeros(int[] message) {
 		int[] result = message;
 		
@@ -11,6 +16,12 @@ public class Decoder {
 		return result;		
 	}
 	
+	/*
+	 * Nenaudojamas programoje, vietoj sito naudojam optimizedDecode
+	 * Atlieka: Paprastas iskodavimas. Iskoduoja zinute.
+	 * Ieitis: message - zinute, m - RM(1, m) m parametras
+	 * Iseitis: result - iskoduota m+1 ilgio zinute
+	 */
 	public static int[] decode(int[] message, int m) {
 		int[] result = new int[m+1];
 		int[] _message = replaceZeros(message);
@@ -37,6 +48,12 @@ public class Decoder {
 		return result;		
 	}
 	
+	/*
+	 * Naudojamas vietoj decode
+	 * Atlieka: Paprastas iskodavimas. Iskoduoja zinute.
+	 * Ieitis: message - zinute, m - RM(1, m) m parametras
+	 * Iseitis: result - iskoduota m+1 ilgio zinute
+	 */
 	public static int[] optimizedDecode(int[] message, int m) {
 		int[] result = new int[m+1];
 		int[] _message = replaceZeros(message);

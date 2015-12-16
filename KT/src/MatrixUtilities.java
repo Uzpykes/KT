@@ -2,8 +2,14 @@
 
 public class MatrixUtilities {
 	
+	// pradine Hadamard matrica
 	static int[][] H = {{1, 1}, {1, -1}};
 	
+	/*
+	 * Atlieka: Daugina vektoriu vector is skaiciaus multiplier
+	 * Ieitis: multiplier - skaicius, vector - vektorius
+	 * Iseitis: result - vektorius kurio reiksmes padaugintos is skaiciaus multiplier
+	 */
 	public static int[] multiplyByInt(int multiplier, int[] vector) {
 		int[] result = new int[vector.length];
 		
@@ -13,6 +19,11 @@ public class MatrixUtilities {
 		return result;
 	}
 	
+	/*
+	 * Atlieka: Dauginam matrica is vektoriaus, taciau ne dot product budu o skirtu uzkodavimui 
+	 * Ieitis: vector - vektorius, matrix - matrica
+	 * Iseitis: result - matrico kurios kiekviena eilute padauginta is vektoriaus reiksmiu
+	 */
 	public static int[][] multiplyMatrixByVector(int[] vector, int[][] matrix) throws VectorException {
 		if (matrix.length != vector.length) {
 			throw new VectorException("Matricos aukstis ir vektoriaus ilgis turi sutapti");
@@ -24,7 +35,11 @@ public class MatrixUtilities {
 		return result;
 	}
 	
-	/* Apskaiciuojama vektoriaus ir matricos sandauga */
+	/*
+	 * Atlieka: tradicinis dot product, taciau skirtas dauginant matrica is vektoriaus
+	 * Ieitis: A - vektorius, B - matrica
+	 * Iseitis: result - vektorius
+	 */
 	public static int[] dotProduct(int[] A, int[][] B) {
 		int[] result = new int[A.length];
 		
@@ -35,7 +50,11 @@ public class MatrixUtilities {
 		return result;		
 	}
 	
-	
+	/*
+	 * Atlieka: Kronecher product
+	 * Ieitis: A - matrica, B - matrica
+	 * Iseitis: result - matrica
+	 */
 	public static int[][] kronecherProduct(int[][] A, int [][]B) {
 		int[][] result = new int[A.length*B.length][A[0].length*B[0].length];
 		
@@ -48,7 +67,11 @@ public class MatrixUtilities {
 		return result;	
 	}
 	
-	
+	/*
+	 * Atlieka: sukuria dydzio size I matrica
+	 * Ieitis: size - norimas matricos dydis
+	 * Iseitis: result - I matrica
+	 */
 	public static int[][] identityMatrix(int size) {
 		int[][] result = new int[size][size];
 		for (int i = 0; i < size; i++)
@@ -58,8 +81,9 @@ public class MatrixUtilities {
 	
 	
 	/*
-	 * 	Hadamard matrica gauta pagal apibrezimo, neoptimali, todel siame darbe nenaudojama
-	 * 
+	 * Atlieka: Hadamard matrica gauta pagal apibrezimo, neoptimali, todel siame darbe nenaudojama
+	 * Ieitis: i ir m Hadamard matricos parametrai
+	 * Iseitis: HadamardMatrica
 	 */
 	public static int[][] hadamardMatrix(int i, int m) {
 		return MatrixUtilities.kronecherProduct(MatrixUtilities.kronecherProduct(MatrixUtilities.identityMatrix((int) Math.pow(2, m-i)), H), MatrixUtilities.identityMatrix((int) Math.pow(2, i-1)));
@@ -103,6 +127,11 @@ public class MatrixUtilities {
 		return new OptimizedHadamard(mainDiagonal, side);
 	}
 	
+	/*
+	 * Atlieka: Grazina dot product naudojant tik reikalingus HadamardMatricos duomenis. T.y. naudojama ne matrica o vektoriai su reikalinga informacija
+	 * Ieitis: message - uzkoduota zinute, H - duomenys apie sugeneruota Hadamard matrica
+	 * Iseitis: result - zinutes ir Hadamard matricos dot product
+	 */
 	public static int[] dotProductForOptimizedHadamard(int[] message, OptimizedHadamard H) {
 		int[] result = new int[message.length];
 		

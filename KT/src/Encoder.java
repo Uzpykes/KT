@@ -6,25 +6,33 @@ public class Encoder {
 	public static int[][] matrix;
 	public int height;
 	public int width;
+	public static int m;
+	public static int k;
 	
-	
+	/*
+	 * Atlieka: 
+	 * Ieitis: 
+	 * Iseitis
+	 */
 	public Encoder(int m) {
-		try {
+		Encoder.m = m;
+		Encoder.k = (int) Math.pow(2, m);
 		matrix = new int[m+1][(int) Math.pow(2, m)];
-		} catch (OutOfMemoryError e) {
-			System.err.println("Neuztenka atminties generacijos matricai sukurti.");
-			throw e;
-		}
 		G();
 		this.height = matrix[0].length;
 		this.width = matrix.length;
 	}
 	
-
+	/*
+	 * Atlieka: Kviecia generaciju matricos algoritma
+	 */
 	public void G() {
 		G(0, matrix[0].length, 0, matrix.length);
 	}
 	
+	/*
+	 * Atlieka: Sugeneruoja Generaciju matrica
+	 */
 	private void G(int startWidth, int width, int startHeight, int height) {
 		
 		/*
@@ -41,12 +49,27 @@ public class Encoder {
 		}
 	}
 	
-	public static int[] Encode(int[] m) {
+	/*
+	 * Atlieka: Uzkoduoja zinute message
+	 * Ieitis: message - zinute kuria uzkoduojam
+	 * Iseitis: result - uzkoduota zinute
+	 */
+	public static int[] Encode(int[] message) {
 		int tmp = 0;
 		int[] result = new int[matrix[0].length];
 		int[][] mm = new int[matrix.length][matrix[0].length];
+		
+		if (message.length < m+1) {
+			int[] appendedMessage = new int[m+1];
+			for (int i = 0; i < message.length; i++) {
+				appendedMessage[i] = message[i];
+			}
+			message = appendedMessage;
+		}
+		
+		
 		try {
-			mm = MatrixUtilities.multiplyMatrixByVector(m, matrix);
+			mm = MatrixUtilities.multiplyMatrixByVector(message, matrix);
 			/*for (int i = 0; i < mm.length; i++){
 				for (int j = 0; j < mm[0].length; i++)
 					System.out.print(mm[j][i] + "");
